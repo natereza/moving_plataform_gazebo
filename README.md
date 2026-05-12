@@ -139,21 +139,25 @@ These variables are sourced automatically when you start a new shell.
 ---
 ## **Installation Setup (With Docker)**
 
-
-
 You can run this setup using Docker. For [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) it is recommended to have [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) installed.
 
 1. **Clone the repository**:
+   ```bash
    git clone https://github.com/natereza/moving_plataform_gazebo.git
    cd moving_plataform_gazebo
+   ```
 
-2. **Build the Docker image**:
+3. **Build the Docker image**:
+4. ```bash
    docker build -t moving-test .
+   ```
 
 This command builds the Docker image for this project. The first build may take a long time (20–60 minutes), because it installs ROS Noetic, PX4 SITL, Gazebo, and compiles all dependencies.
 
 3. **Verify the image was built**:
+   ```bash
    docker images
+   ```
 
 You should see an image named moving-test.
 
