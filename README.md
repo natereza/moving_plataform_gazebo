@@ -1,3 +1,10 @@
+# Usei o modelo do Iago como base
+https://github.com/iago-silvestre/search-rescue-px4
+Mas tirei várias coisas, como as pessoas no mar.
+
+#Também inseri um modelo de plataforma móvel
+https://github.com/PX4/PX4-gazebo-models/blob/moving_platform_world/worlds/moving_platform.sdf
+
 # **Jason BDI Agents for UAV Control in PX4 SITL Search and Rescue Simulation**
 Embedded-MAS Agents at /AgentsEMAS , more details at https://github.com/embedded-mas/embedded-mas/tree/master/examples/jacamo/ros
 
