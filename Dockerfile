@@ -55,7 +55,7 @@ RUN wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/
 
 # Create catkin workspace and clone search-rescue-px4
 RUN mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src && \
-    git clone https://github.com/iago-silvestre/search-rescue-px4.git && \
+    git clone https://github.com/natereza/moving_plataform_gazebo.git && \
     git clone https://github.com/Greenzie/boustrophedon_planner.git && \
     git clone https://github.com/iago-silvestre/gazebo_ros_link_attacher
 
@@ -82,9 +82,9 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
     echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/catkin_ws" >> ~/.bashrc && \
     #echo "export JASON_HOME=~/jason" >> ~/.bashrc && \
     #echo "export PATH=\$JASON_HOME/bin:\$PATH" >> ~/.bashrc && \
-    echo "export GAZEBO_MODEL_PATH=\$GAZEBO_MODEL_PATH:~/catkin_ws/src/search-rescue-px4/models" >> ~/.bashrc
+    echo "export GAZEBO_MODEL_PATH=\$GAZEBO_MODEL_PATH:~/catkin_ws/src/moving_plataform_gazebo/models" >> ~/.bashrc
 
-#RUN find /root/catkin_ws/src/search-rescue-px4/scripts -type f -name "*.sh" -exec chmod +x {} +
+#RUN find /root/catkin_ws/src/moving_plataform_gazebo/scripts -type f -name "*.sh" -exec chmod +x {} +
 
 # Clone and setup PX4-Autopilot
 RUN git clone --recursive https://github.com/PX4/PX4-Autopilot.git /root/PX4-Autopilot && \
@@ -97,7 +97,7 @@ RUN git clone --recursive https://github.com/PX4/PX4-Autopilot.git /root/PX4-Aut
 ENV DISPLAY=:0
 
 # Set working directory and source environment at container startup
-WORKDIR /root/catkin_ws/src/search-rescue-px4
+WORKDIR /root/catkin_ws/src/moving_plataform_gazebo
 # Copy your custom entrypoint script into the container
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
