@@ -138,19 +138,25 @@ These variables are sourced automatically when you start a new shell.
 
 ---
 ## **Installation Setup (With Docker)**
-You can run this setup using Docker. For [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) it is recommended to have [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) installed.
-1. **Clone the docker image**:
-   ```bash
-   docker pull natereza/moving_plataform_gazebo
-   ```
-This command pulls the prebuilt Docker image for this project and stores it in Docker’s virtual disk. This process may take a while.
 
-Alternatively, you can build the Docker image yourself. This is usually not recommended, because Dockerfiles involving GUI applications can sometimes have compatibility issues depending on your host machine’s kernel.
- **Build the Docker image**:
-   ```bash
-   docker build -t natereza/moving_plataform_gazebo .
-   ```
----
+
+
+You can run this setup using Docker. For [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) it is recommended to have [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) installed.
+
+1. **Clone the repository**:
+   git clone https://github.com/natereza/moving_plataform_gazebo.git
+   cd moving_plataform_gazebo
+
+2. **Build the Docker image**:
+   docker build -t moving-test .
+
+This command builds the Docker image for this project. The first build may take a long time (20–60 minutes), because it installs ROS Noetic, PX4 SITL, Gazebo, and compiles all dependencies.
+
+3. **Verify the image was built**:
+   docker images
+
+You should see an image named moving-test.
+
 
 ### **For Windows Users (with VCXsrv)**
 
