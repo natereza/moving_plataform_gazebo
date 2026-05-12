@@ -112,7 +112,7 @@ Create a **catkin workspace** for ROS and clone the project repository:
 ```bash
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
-git clone https://github.com/iago-silvestre/search-rescue-px4.git
+git clone https://github.com/natereza/moving_plataform_gazebo.git
 cd ~/catkin_ws
 source /opt/ros/noetic/setup.bash
 catkin_make
@@ -130,7 +130,7 @@ echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/PX4-Autopilot" >> ~/.bashrc
 echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/PX4-Autopilot/Tools/simulation/gazebo-classic/sitl_gazebo-classic" >> ~/.bashrc
 echo "export GAZEBO_PLUGIN_PATH=\$GAZEBO_PLUGIN_PATH:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins" >> ~/.bashrc
 echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/catkin_ws" >> ~/.bashrc
-echo "export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/catkin_ws/src/search-rescue-px4/models" >> ~/.bashrc
+echo "export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/catkin_ws/src/moving_plataform_gazebo/models" >> ~/.bashrc
 source ~/.bashrc
 ```
 
@@ -141,14 +141,14 @@ These variables are sourced automatically when you start a new shell.
 You can run this setup using Docker. For [Windows](https://docs.docker.com/desktop/setup/install/windows-install/) it is recommended to have [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) installed.
 1. **Clone the docker image**:
    ```bash
-   docker pull iagosilvestre/px4_jason
+   docker pull natereza/moving_plataform_gazebo
    ```
 This command pulls the prebuilt Docker image for this project and stores it in Docker’s virtual disk. This process may take a while.
 
 Alternatively, you can build the Docker image yourself. This is usually not recommended, because Dockerfiles involving GUI applications can sometimes have compatibility issues depending on your host machine’s kernel.
  **Build the Docker image**:
    ```bash
-   docker build -t iagosilvestre/px4_jason .
+   docker build -t natereza/moving_plataform_gazebo .
    ```
 ---
 
@@ -164,7 +164,7 @@ Set the `DISPLAY` to point to the host machine’s X11 server:
 
 3. **Run the container**:
    ```bash
-   docker run -it --rm --env DISPLAY=host.docker.internal:0 --volume /tmp/.X11-unix:/tmp/.X11-unix --env QT_X11_NO_MITSHM=1 --net host iagosilvestre/px4_jason
+   docker run -it --rm --env DISPLAY=host.docker.internal:0 --volume /tmp/.X11-unix:/tmp/.X11-unix --env QT_X11_NO_MITSHM=1 --net host natereza/moving_plataform_gazebo
    ```
 
    You could add another volume if you're working on agents source code on your host machine, just add the following in the docker run command mentioned above:
@@ -182,7 +182,7 @@ Set the `DISPLAY` to point to the host machine’s X11 server:
 
 2. **Run the container**:
    ```bash
-   docker run -it --rm --env DISPLAY=$DISPLAY --volume /tmp/.X11-unix:/tmp/.X11-unix --env QT_X11_NO_MITSHM=1 --net host iagosilvestre/px4_jason
+   docker run -it --rm --env DISPLAY=$DISPLAY --volume /tmp/.X11-unix:/tmp/.X11-unix --env QT_X11_NO_MITSHM=1 --net host natereza/moving_plataform_gazebo
    ```
    You could add another volume if you're working on agents source code on your host machine, just add the following in the docker run command mentioned above:
    ```bash
@@ -210,7 +210,7 @@ Then you can join your container on a new terminal by entering, make sure to rep
 ## **How to Use the Setup**
 Start by running the Gazebo Simulation and spawning the PX4 UAVs
 ```bash
-roslaunch search-rescue-px4 multi_uav_mavros_sitl.launch 
+roslaunch moving_plataform_gazebo multi_uav_mavros_sitl.launch 
 ```
 This should open a ROS-Gazebo simulation of 3 UAVs in a rescue scenario. From there you can control these UAVs with MAVROS topics and services such as
 ```bash
