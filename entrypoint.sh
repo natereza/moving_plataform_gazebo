@@ -3,7 +3,7 @@
 git pull
 
 # Ensure all .sh scripts are executable
-find /root/catkin_ws/src/search-rescue-px4/scripts -type f -name "*.sh" -exec chmod +x {} +
+find /root/catkin_ws/src/moving_plataform_gazebo/scripts -type f -name "*.sh" -exec chmod +x {} +
 
 # Source the bashrc (only works for interactive shells; may not persist here)
 source ~/.bashrc
