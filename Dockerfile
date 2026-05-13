@@ -1,5 +1,5 @@
 # Use the official PX4 development image with ROS Noetic
-FROM px4io/px4-dev-ros-noetic
+FROM iagosilvestre/px4_jason:latest
 
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F42ED6FBAB17C654
 
@@ -19,40 +19,6 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F42ED6FBAB17C654
 #RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add - && \
 #    echo "deb http://packages.ros.org/ros/ubuntu focal main" > /etc/apt/sources.list.d/ros-latest.list
 
-# Update package list and install additional dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    wget \
-    curl \
-    unzip \
-    python3-pip \
-    python3-rosinstall \
-    python3-rosinstall-generator \
-    python3-wstool \
-    nano \
-    ros-noetic-xacro \
-    ros-noetic-rosbridge-suite \
-    ros-noetic-gazebo-plugins \
-    ros-noetic-rostest \
-    ros-noetic-image-view \
-    htop \
-    ros-noetic-rviz \
-    ros-noetic-gazebo-ros-pkgs \
-    ros-noetic-rosparam-shortcuts \
-    libcgal-dev \
-    openjdk-21-jdk \
-    x11-xserver-utils \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update && apt-get install -y \
-    ros-noetic-rqt-console \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install GeographicLib datasets for MAVROs
-RUN wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh \
-    && chmod +x install_geographiclib_datasets.sh \
-    && ./install_geographiclib_datasets.sh
-
 # Create catkin workspace and clone search-rescue-px4
 RUN mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src && \
     git clone https://github.com/natereza/moving_plataform_gazebo.git && \
@@ -62,15 +28,6 @@ RUN mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src && \
 # Build catkin workspace
 WORKDIR /root/catkin_ws
 RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && catkin_make"
-
-# Install Jason BDI
-WORKDIR /root
-#RUN git clone https://github.com/jason-lang/jason.git ~/jason && \
-#    cd ~/jason && \
-#    ./gradlew config
-RUN echo "deb [trusted=yes] http://packages.chon.group/ chonos main" | sudo tee /etc/apt/sources.list.d/chonos.list && \
-    apt update && \
-    apt install jason-cli
 
 # Update bashrc with required environment variables
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
@@ -85,13 +42,6 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
     echo "export GAZEBO_MODEL_PATH=\$GAZEBO_MODEL_PATH:~/catkin_ws/src/moving_plataform_gazebo/models" >> ~/.bashrc
 
 #RUN find /root/catkin_ws/src/moving_plataform_gazebo/scripts -type f -name "*.sh" -exec chmod +x {} +
-
-# Clone and setup PX4-Autopilot
-RUN git clone --recursive https://github.com/PX4/PX4-Autopilot.git /root/PX4-Autopilot && \
-    cd /root/PX4-Autopilot && \
-    bash ./Tools/setup/ubuntu.sh && \
-    DONT_RUN=1 make px4_sitl_default gazebo-classic
-
 
 # Expose the display for GUI-based applications
 ENV DISPLAY=:0
