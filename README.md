@@ -174,7 +174,7 @@ Set the `DISPLAY` to point to the host machine’s X11 server:
 
 3. **Run the container**:
    ```bash
-   docker run -it --rm --env DISPLAY=host.docker.internal:0 --volume /tmp/.X11-unix:/tmp/.X11-unix --env QT_X11_NO_MITSHM=1 --net host natereza/moving_plataform_gazebo
+   docker run -it --rm --env DISPLAY=host.docker.internal:0 --volume /tmp/.X11-unix:/tmp/.X11-unix --env QT_X11_NO_MITSHM=1 --net host moving-test
    ```
 
    You could add another volume if you're working on agents source code on your host machine, just add the following in the docker run command mentioned above:
