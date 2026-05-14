@@ -220,7 +220,7 @@ Then you can join your container on a new terminal by entering, make sure to rep
 ## **How to Use the Setup**
 Start by running the Gazebo Simulation and spawning the PX4 UAVs
 ```bash
-roslaunch moving_plataform_gazebo multi_uav_mavros_sitl.launch 
+roslaunch search-rescue-px4 multi_uav_mavros_sitl.launch
 ```
 This should open a ROS-Gazebo simulation of 3 UAVs in a rescue scenario. From there you can control these UAVs with MAVROS topics and services such as
 ```bash
