@@ -20,8 +20,14 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F42ED6FBAB17C654
 #    echo "deb http://packages.ros.org/ros/ubuntu focal main" > /etc/apt/sources.list.d/ros-latest.list
 
 # Create catkin workspace and clone search-rescue-px4
-RUN mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src && \
+#####teste
+RUN rm -rf /root/catkin_ws/src/search-rescue-px4 && \
+    mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src && \
     git clone https://github.com/natereza/moving_plataform_gazebo.git
+#####
+
+#RUN mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src && \
+#    git clone https://github.com/natereza/moving_plataform_gazebo.git
 
 # Build catkin workspace
 WORKDIR /root/catkin_ws
