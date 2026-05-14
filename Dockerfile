@@ -21,9 +21,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F42ED6FBAB17C654
 
 # Create catkin workspace and clone search-rescue-px4
 RUN mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src && \
-    git clone https://github.com/natereza/moving_plataform_gazebo.git && \
-    git clone https://github.com/Greenzie/boustrophedon_planner.git && \
-    git clone https://github.com/iago-silvestre/gazebo_ros_link_attacher
+    git clone https://github.com/natereza/moving_plataform_gazebo.git
 
 # Build catkin workspace
 WORKDIR /root/catkin_ws
