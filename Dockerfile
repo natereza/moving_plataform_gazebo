@@ -45,7 +45,8 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
     #echo "export PATH=\$JASON_HOME/bin:\$PATH" >> ~/.bashrc && \
     echo "export GAZEBO_MODEL_PATH=\$GAZEBO_MODEL_PATH:~/catkin_ws/src/search-rescue-px4/models" >> ~/.bashrc
 
-#RUN find /root/catkin_ws/src/moving_plataform_gazebo/scripts -type f -name "*.sh" -exec chmod +x {} +
+# acabei de descomentar
+RUN find /root/catkin_ws/src/moving_plataform_gazebo/scripts -type f -name "*.sh" -exec chmod +x {} +
 
 # Expose the display for GUI-based applications
 ENV DISPLAY=:0
