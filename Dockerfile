@@ -43,7 +43,7 @@ RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
     echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/catkin_ws" >> ~/.bashrc && \
     #echo "export JASON_HOME=~/jason" >> ~/.bashrc && \
     #echo "export PATH=\$JASON_HOME/bin:\$PATH" >> ~/.bashrc && \
-    echo "export GAZEBO_MODEL_PATH=\$GAZEBO_MODEL_PATH:~/catkin_ws/src/moving_plataform_gazebo/models" >> ~/.bashrc
+    echo "export GAZEBO_MODEL_PATH=\$GAZEBO_MODEL_PATH:~/catkin_ws/src/search-rescue-px4/models" >> ~/.bashrc
 
 #RUN find /root/catkin_ws/src/moving_plataform_gazebo/scripts -type f -name "*.sh" -exec chmod +x {} +
 
