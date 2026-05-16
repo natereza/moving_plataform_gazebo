@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>search-rescue-px4</name>
+  <name>moving_plataform_gazebo</name>
   <version>1.0.0</version>
   <description>Package with active perception experiments in Jason</description>
 
@@ -8,7 +8,7 @@
 
   <license>GPLv3</license>
 
-  <url type="website">https://github.com/iago-silvestre/search-rescue-px4</url>
+  <url type="website">https://github.com/iago-silvestre/moving_plataform_gazebo</url>
 
 
   <buildtool_depend>catkin</buildtool_depend>
