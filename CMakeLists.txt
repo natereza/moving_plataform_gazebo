@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(search-rescue-px4)
+project(moving_plataform_gazebo)
 
 # Check for c++11 / c++0x support
 include(CheckCXXCompilerFlag)
