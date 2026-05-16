@@ -21,8 +21,10 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F42ED6FBAB17C654
 
 # Create catkin workspace and clone moving_plataform_gazebo
 #####teste
-RUN rm -rf /root/catkin_ws/src/moving_plataform_gazebo && \
-    mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src && \
+RUN rm -rf /root/catkin_ws/src/search-rescue-px4 && \
+    rm -rf /root/catkin_ws/src/moving_plataform_gazebo && \
+    mkdir -p /root/catkin_ws/src && \
+    cd /root/catkin_ws/src && \
     git clone https://github.com/natereza/moving_plataform_gazebo.git
 #####
 
