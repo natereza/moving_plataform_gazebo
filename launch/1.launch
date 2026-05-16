@@ -5,7 +5,7 @@
     <!-- vehicle model and world -->
     <arg name="est" default="ekf2"/>
     <arg name="vehicle" default="iris"/>
-    <arg name="world" default="$(find search-rescue-px4)/worlds/rescue.world"/>
+    <arg name="world" default="$(find moving_plataform_gazebo)/worlds/rescue.world"/>
     <!-- gazebo configs -->
     <arg name="gui" default="true"/>
     <arg name="debug" default="false"/>
@@ -35,13 +35,13 @@
             <arg name="video_uri" value="$(eval 5600 + arg('ID'))"/>
             <arg name="mavlink_cam_udp_port" value="$(eval 14530 + arg('ID'))"/>
         </include>
-        <arg name="model" value="$(find search-rescue-px4)/models/iris_downward_cam/model.sdf"/>
+        <arg name="model" value="$(find moving_plataform_gazebo)/models/iris_downward_cam/model.sdf"/>
         <node name="$(anon vehicle_spawn)" pkg="gazebo_ros" type="spawn_model" output="screen" 
               args="-sdf -file $(arg model) -model cam$(arg ID) -x 0 -y 0 -z 0 -R 0 -P 0 -Y 0"
               launch-prefix="bash -c 'sleep 5; $0 $@'"/>
 
         <!-- Attach the camera to the drone -->
-        <!--node name="attach_camera" pkg="search-rescue-px4" type="attach_camera.sh" output="screen"
+        <!--node name="attach_camera" pkg="moving_plataform_gazebo" type="attach_camera.sh" output="screen"
             launch-prefix="bash -c 'sleep 5;exec $0'"/-->
         <!-- MAVROS -->
         <include file="$(find mavros)/launch/px4.launch">
@@ -55,8 +55,8 @@
         <arg name="drone_link" default="base_link"/>
         <arg name="camera_model" default="cam0"/>
         <arg name="camera_link" default="camera_link"/>
-        <node pkg="search-rescue-px4" type="attach_camera.sh" name="attach_camera_node" output="screen" launch-prefix="bash" args="$(arg drone_model) $(arg drone_link) $(arg camera_model) $(arg camera_link)"/-->
-        <node name="attach_camera" pkg="search-rescue-px4" type="cam0.sh" output="screen"
+        <node pkg="moving_plataform_gazebo" type="attach_camera.sh" name="attach_camera_node" output="screen" launch-prefix="bash" args="$(arg drone_model) $(arg drone_link) $(arg camera_model) $(arg camera_link)"/-->
+        <node name="attach_camera" pkg="moving_plataform_gazebo" type="cam0.sh" output="screen"
             launch-prefix="bash -c 'exec $0'"/>
         
         
