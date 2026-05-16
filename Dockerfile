@@ -19,9 +19,9 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F42ED6FBAB17C654
 #RUN curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add - && \
 #    echo "deb http://packages.ros.org/ros/ubuntu focal main" > /etc/apt/sources.list.d/ros-latest.list
 
-# Create catkin workspace and clone search-rescue-px4
+# Create catkin workspace and clone moving_plataform_gazebo
 #####teste
-RUN rm -rf /root/catkin_ws/src/search-rescue-px4 && \
+RUN rm -rf /root/catkin_ws/src/moving_plataform_gazebo && \
     mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src && \
     git clone https://github.com/natereza/moving_plataform_gazebo.git
 #####
