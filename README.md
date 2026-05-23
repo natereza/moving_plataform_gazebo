@@ -202,6 +202,12 @@ Set the `DISPLAY` to point to the host machine’s X11 server:
 ---
 ### **Tips for Docker**
 You can open another terminal in the docker image by joining the same container, first check which containers are running:
+
+**Abrir outro terminal dentro do container**:
+   ```bash
+   docker exec -it moving_container bash
+   ```
+
 1. **Check running containers**:
    ```bash
    docker ps
