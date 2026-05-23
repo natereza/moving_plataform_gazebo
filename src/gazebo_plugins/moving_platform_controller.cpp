@@ -6,6 +6,10 @@
 #include <gazebo/physics/physics.hh>
 #include <gazebo/common/common.hh>
 
+// publisher em ROS 1
+#include <ros/ros.h>
+#include <geometry_msgs/PoseStamped.h>
+
 namespace gazebo
 {
 class MovingPlatformController : public ModelPlugin
@@ -27,6 +31,27 @@ public:
 
     if (sdf->HasElement("z_offset"))
       this->z_offset_ = sdf->Get<double>("z_offset");
+
+    // Inicializa ROS, se ainda não estiver inicializado
+    if (!ros::isInitialized())
+    {
+      int argc = 0;
+      char **argv = nullptr;
+
+      ros::init(
+        argc,
+        argv,
+        "moving_platform_controller",
+        ros::init_options::NoSigintHandler
+      );
+    }
+
+    this->ros_node_ = new ros::NodeHandle("");
+
+    this->pose_pub_ = this->ros_node_->advertise<geometry_msgs::PoseStamped>(
+      "/moving_platform/pose",
+      10
+    );
 
     gzmsg << "[MovingPlatformController] Loaded for model ["
           << this->model_->GetName() << "] axis=" << this->axis_
@@ -70,11 +95,36 @@ private:
     this->model_->SetWorldPose(pose);
     this->model_->SetLinearVel(linear_velocity);
     this->model_->SetAngularVel(ignition::math::Vector3d(0, 0, 0));
+
+    // publica pose da plataforma em ROS
+    geometry_msgs::PoseStamped pose_msg;
+
+    pose_msg.header.stamp = ros::Time(
+      info.simTime.sec,
+      info.simTime.nsec
+    );
+
+    pose_msg.header.frame_id = "world";
+
+    pose_msg.pose.position.x = pose.Pos().X();
+    pose_msg.pose.position.y = pose.Pos().Y();
+    pose_msg.pose.position.z = pose.Pos().Z();
+
+    pose_msg.pose.orientation.x = pose.Rot().X();
+    pose_msg.pose.orientation.y = pose.Rot().Y();
+    pose_msg.pose.orientation.z = pose.Rot().Z();
+    pose_msg.pose.orientation.w = pose.Rot().W();
+
+    this->pose_pub_.publish(pose_msg);
   }
 
   physics::ModelPtr model_;
   event::ConnectionPtr update_connection_;
   ignition::math::Pose3d initial_pose_;
+
+  ros::NodeHandle *ros_node_;
+  ros::Publisher pose_pub_;
+
   std::string axis_ = "x";
   double amplitude_ = 4.0;
   double omega_ = 0.25;
