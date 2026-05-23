@@ -50,3 +50,6 @@ target_link_libraries(camera_switch ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
 
 add_library(victim src/gazebo_plugins/victim.cpp)
 target_link_libraries(victim ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
+
+add_library(MovingPlatformController src/gazebo_plugins/moving_platform_controller.cpp)
+target_link_libraries(MovingPlatformController ${catkin_LIBRARIES} ${GAZEBO_LIBRARIES})
