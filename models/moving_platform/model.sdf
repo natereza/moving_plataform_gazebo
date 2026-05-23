@@ -1,7 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sdf version="1.6">
-  <model name="flat_platform">
+  <model name="moving_platform">
+    <static>false</static>
+    <allow_auto_disable>false</allow_auto_disable>
+
     <link name="platform_link">
+      <gravity>false</gravity>
+      <pose>0 0 2 0 0 0</pose>
+
+      <inertial>
+        <mass>10000</mass>
+        <inertia>
+          <ixx>10000</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>10000</iyy>
+          <iyz>0</iyz>
+          <izz>10000</izz>
+        </inertia>
+      </inertial>
+
       <visual name="platform_visual">
         <geometry>
           <box>
@@ -14,6 +32,7 @@
           <specular>0.1 0.1 0.1 1</specular>
         </material>
       </visual>
+
       <collision name="platform_collision">
         <geometry>
           <box>
@@ -21,33 +40,23 @@
           </box>
         </geometry>
       </collision>
-      <pose>0 0 2 0 0 0</pose>
-      <inertial>
-          <mass>10000</mass>
-          <inertia>
-              <ixx>10000</ixx>
-              <iyy>10000</iyy>
-              <izz>10000</izz>
-          </inertia>
-      </inertial>
+
       <sensor name="navsat_sensor" type="navsat">
         <always_on>1</always_on>
         <update_rate>30</update_rate>
       </sensor>
+
       <sensor name="imu_sensor" type="imu">
-          <always_on>1</always_on>
-          <update_rate>30</update_rate>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
       </sensor>
     </link>
-    <!-- plugin for sending direct velocity commands -->
-    <plugin
-      filename="gz-sim-velocity-control-system"
-      name="gz::sim::systems::VelocityControl">
-    </plugin>
-    <!-- plugin for controlling platform movement -->
-    <plugin
-      filename="libMovingPlatformController.so"
-      name="custom::MovingPlatformController">
+
+    <plugin filename="libMovingPlatformController.so" name="moving_platform_controller">
+      <axis>x</axis>
+      <amplitude>4.0</amplitude>
+      <omega>0.25</omega>
+      <z_offset>0.0</z_offset>
     </plugin>
   </model>
 </sdf>
