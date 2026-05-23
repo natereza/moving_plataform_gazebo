@@ -5,6 +5,10 @@ cd /root/catkin_ws/src/moving_plataform_gazebo
 
 git pull --ff-only || true
 
+sed -i '/search-rescue-px4/d' /root/.bashrc || true
+sed -i '/GAZEBO_MODEL_PATH/d' /root/.bashrc || true
+sed -i '/GAZEBO_PLUGIN_PATH/d' /root/.bashrc || true
+
 find /root/catkin_ws/src/moving_plataform_gazebo/scripts -type f -name "*.sh" -exec chmod +x {} +
 
 cd /root/catkin_ws
