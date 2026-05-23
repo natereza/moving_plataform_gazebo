@@ -35,8 +35,6 @@ catkin_package(
     geometry_msgs
     gazebo_msgs
     gazebo_ros
-  DEPENDS
-    gazebo
 )
 
 add_library(spawn_buoy src/gazebo_plugins/spawn_buoy.cpp)
