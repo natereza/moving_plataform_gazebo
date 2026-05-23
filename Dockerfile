@@ -26,6 +26,12 @@ RUN rm -rf /root/catkin_ws/src/search-rescue-px4 && \
     mkdir -p /root/catkin_ws/src && \
     cd /root/catkin_ws/src && \
     git clone https://github.com/natereza/moving_plataform_gazebo.git
+
+RUN sed -i '/search-rescue-px4/d' /root/.bashrc || true && \
+    sed -i '/GAZEBO_MODEL_PATH/d' /root/.bashrc || true && \
+    sed -i '/GAZEBO_PLUGIN_PATH/d' /root/.bashrc || true && \
+    sed -i '/setup_gazebo.bash/d' /root/.bashrc || true && \
+    sed -i '/catkin_ws\/devel\/setup.bash/d' /root/.bashrc || true
 #####
 
 #RUN mkdir -p ~/catkin_ws/src && cd ~/catkin_ws/src && \
@@ -37,12 +43,12 @@ RUN /bin/bash -c "source /opt/ros/noetic/setup.bash && catkin_make"
 
 # Update bashrc with required environment variables
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc && \
-    echo "source ~/catkin_ws/devel/setup.bash" >> ~/.bashrc && \
-    echo "source ~/PX4-Autopilot/Tools/simulation/gazebo-classic/setup_gazebo.bash ~/PX4-Autopilot ~/PX4-Autopilot/build/px4_sitl_default" >> ~/.bashrc && \
+    echo "source /root/catkin_ws/devel/setup.bash" >> ~/.bashrc && \
+    echo "source /root/PX4-Autopilot/Tools/simulation/gazebo-classic/setup_gazebo.bash /root/PX4-Autopilot /root/PX4-Autopilot/build/px4_sitl_default" >> ~/.bashrc && \
     echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/PX4-Autopilot" >> ~/.bashrc && \
-    echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/PX4-Autopilot/Tools/simulation/gazebo-classic/sitl_gazebo-classic" >> ~/.bashrc && \
+    echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:/root/PX4-Autopilot/Tools/simulation/gazebo-classic/sitl_gazebo-classic" >> ~/.bashrc && \
     echo "export GAZEBO_PLUGIN_PATH=/root/catkin_ws/devel/lib:\$GAZEBO_PLUGIN_PATH:/usr/lib/x86_64-linux-gnu/gazebo-11/plugins" >> ~/.bashrc && \
-    echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:~/catkin_ws" >> ~/.bashrc && \
+    echo "export ROS_PACKAGE_PATH=\$ROS_PACKAGE_PATH:/root/catkin_ws" >> ~/.bashrc && \
     #echo "export JASON_HOME=~/jason" >> ~/.bashrc && \
     #echo "export PATH=\$JASON_HOME/bin:\$PATH" >> ~/.bashrc && \
     echo "export GAZEBO_MODEL_PATH=/root/catkin_ws/src/moving_plataform_gazebo/models:\$GAZEBO_MODEL_PATH" >> ~/.bashrc
