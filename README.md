@@ -208,9 +208,12 @@ You can open another terminal in the docker image by joining the same container,
    docker exec -it moving_container bash
    ```
 
-1. **Check running containers**:
+**Lista de tópicos**:
    ```bash
-   docker ps
+   rostopic list
+   ```
+   ```bash
+      rostopic list | grep moving
    ```
 Then you can join your container on a new terminal by entering, make sure to replace container_name to your own:
 
